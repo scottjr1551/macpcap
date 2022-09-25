@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/SRC" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/macpcap" vcs="Git" />
   </component>
 </project>
