@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>CMakeLists.txt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CMakeLists.txt</font>
+</center></td></tr></table>
+<pre><span class="s0">#</span>
+<span class="s0"># Cmake file for the application macpcap</span>
+<span class="s0"># Author: Scott Roberts</span>
+<span class="s0"># Date: 07/25/2022</span>
+<span class="s0">#</span>
+
+<span class="s0">#</span>
+<span class="s0"># Global Definitions</span>
+<span class="s0">#</span>
+
+<span class="s2">cmake_minimum_required</span><span class="s1">(</span><span class="s3">VERSION 3.23</span><span class="s1">)</span>
+<span class="s2">set</span><span class="s1">(</span><span class="s3">CMAKE_CXX_STANDARD 23</span><span class="s1">)</span>
+
+<span class="s2">project</span><span class="s1">(</span><span class="s3">macpcap VERSION 1.0.0.0</span><span class="s1">)</span>
+<span class="s2">set</span><span class="s1">(</span><span class="s3">CMAKE_MODULE_PATH </span><span class="s4">${</span><span class="s3">CMAKE_MODULE_PATH</span><span class="s4">} </span><span class="s1">&quot;</span><span class="s4">${</span><span class="s3">CMAKE_SOURCE_DIR</span><span class="s4">}</span><span class="s3">/</span><span class="s1">&quot; </span><span class="s3">/Users/scottroberts/CLionProjects/module</span><span class="s1">)</span>
+
+<span class="s2">include</span><span class="s1">(</span><span class="s3">cmake/include/GetDateTime.cmake</span><span class="s1">)</span>
+<span class="s2">include</span><span class="s1">(</span><span class="s3">cmake/include/misc.cmake</span><span class="s1">)</span>
+<span class="s2">include_directories</span><span class="s1">(</span><span class="s3">/usr/local/include/pcapplusplus</span><span class="s1">)</span>
+<span class="s2">include_directories</span><span class="s1">(</span><span class="s3">/usr/local/opt/libpcap/include</span><span class="s1">)</span>
+<span class="s2">include_directories</span><span class="s1">(</span><span class="s3">/usr/local/include/concurrencpp-0.1.4 /usr/local/Cellar/boost/1.79.0_1/include/</span><span class="s1">)</span>
+
+<span class="s2">getdatetime</span><span class="s1">()  </span><span class="s0"># sets dt</span>
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">\nStarting at </span><span class="s4">${</span><span class="s3">dt</span><span class="s4">} </span><span class="s3">- Version </span><span class="s4">${</span><span class="s3">PROJECT_VERSION</span><span class="s4">}</span><span class="s1">&quot;)</span>
+<span class="s2">systeminfo</span><span class="s1">()</span>
+<span class="s2">checkipo</span><span class="s1">() </span><span class="s0"># will set IPO True if supported</span>
+
+<span class="s0">#</span>
+<span class="s0"># Target for macpcap</span>
+<span class="s0">#</span>
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">\nTarget: macpcap</span><span class="s1">&quot;)</span>
+<span class="s2">add_executable</span><span class="s1">(</span><span class="s3">macpcap SRC/main.cpp SRC/Protocols/parser.cpp SRC/Protocols/HostPair.h SRC/Protocols/TCPConversation.h</span>
+        <span class="s3">SRC/Protocols/HostPair.cpp SRC/Protocols/HostPair.h SRC/Protocols/TCPConversation.cpp myColor.h SRC/Protocols/EthernetStats.cpp SRC/Protocols/EthernetStats.h SRC/Protocols/ProtocolStats.cpp SRC/Protocols/ProtocolStats.h</span><span class="s1">)</span>
+
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">macpcap: FMT package</span><span class="s1">&quot;)</span>
+<span class="s2">find_package</span><span class="s1">(</span><span class="s3">fmt</span><span class="s1">)</span>
+<span class="s2">target_link_libraries</span><span class="s1">(</span><span class="s3">macpcap fmt::fmt</span><span class="s1">)</span>
+
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">macpcap: concurrencpp library</span><span class="s1">&quot;)</span>
+<span class="s2">target_link_libraries</span><span class="s1">(</span><span class="s3">macpcap /usr/local/lib/libconcurrencpp.a</span><span class="s1">)</span>
+
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">macpcap: Loading PCAP</span><span class="s1">&quot;)</span>
+<span class="s2">find_package</span><span class="s1">(</span><span class="s3">PCAP</span><span class="s1">)</span>
+<span class="s2">target_link_libraries</span><span class="s1">(</span><span class="s4">${</span><span class="s3">PROJECT_NAME</span><span class="s4">} ${</span><span class="s3">PCAP_LIBRARY</span><span class="s4">}</span><span class="s1">)</span>
+
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">macpcap: Loading PCAP++</span><span class="s1">&quot;)</span>
+<span class="s2">find_package</span><span class="s1">(</span><span class="s3">PcapPlusPlus REQUIRED</span><span class="s1">)</span>
+<span class="s2">target_link_libraries</span><span class="s1">(</span><span class="s4">${</span><span class="s3">PROJECT_NAME</span><span class="s4">} ${</span><span class="s3">PcapPlusPlus_LIBRARIES</span><span class="s4">}</span><span class="s1">)</span>
+
+<span class="s2">find_package</span><span class="s1">(</span><span class="s3">glog</span><span class="s1">)</span>
+<span class="s2">target_link_libraries</span><span class="s1">(</span><span class="s4">${</span><span class="s3">PROJECT_NAME</span><span class="s4">} </span><span class="s3">glog::glog</span><span class="s1">)</span>
+
+<span class="s2">FIND_PACKAGE</span><span class="s1">(</span><span class="s3">Boost 1.79 COMPONENTS program_options REQUIRED</span><span class="s1">)</span>
+<span class="s2">INCLUDE_DIRECTORIES</span><span class="s1">(</span><span class="s4">${</span><span class="s3">Boost_INCLUDE_DIR</span><span class="s4">}</span><span class="s1">)</span>
+
+<span class="s2">TARGET_LINK_LIBRARIES</span><span class="s1">(</span><span class="s4">${</span><span class="s3">PROJECT_NAME</span><span class="s4">} ${</span><span class="s3">Boost_LIBRARIES</span><span class="s4">}</span><span class="s1">)</span>
+<span class="s0">#</span>
+<span class="s0"># End oc CMake file</span>
+<span class="s0">#</span>
+<span class="s2">getdatetime</span><span class="s1">()</span>
+<span class="s2">message</span><span class="s1">(&quot;</span><span class="s3">\nStopping at </span><span class="s4">${</span><span class="s3">dt</span><span class="s4">}</span><span class="s1">&quot;)</span>
+
+</pre>
+</body>
+</html>

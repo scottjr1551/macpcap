@@ -1,0 +1,6 @@
+<map id="ProtocolStats::sortMap" name="ProtocolStats::sortMap">
+<area shape="rect" id="node1" title=" " alt="" coords="5,55,161,80"/>
+<area shape="rect" id="node2" href="$class_protocol_stats.html#a5fe44640e55dca5116f7de07d32e5812" title="Sort a list of pairs by the second element, in this case doubles." alt="" coords="209,5,360,31"/>
+<area shape="rect" id="node3" href="$class_protocol_stats.html#a5e5515ac2d6e416ed8470abeb0186e61" title="sort a list of pairs by second element, in this case int" alt="" coords="211,55,358,80"/>
+<area shape="rect" id="node4" href="$class_protocol_stats.html#a010cf40588c7863cc8dbe6ca63c7c940" title="Sort a list of pairs by the second element, in this case strings." alt="" coords="211,104,359,129"/>
+</map>

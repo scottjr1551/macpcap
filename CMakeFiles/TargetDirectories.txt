@@ -1,0 +1,3 @@
+/Users/scottroberts/CLionProjects/macpcap/CMakeFiles/macpcap.dir
+/Users/scottroberts/CLionProjects/macpcap/CMakeFiles/edit_cache.dir
+/Users/scottroberts/CLionProjects/macpcap/CMakeFiles/rebuild_cache.dir

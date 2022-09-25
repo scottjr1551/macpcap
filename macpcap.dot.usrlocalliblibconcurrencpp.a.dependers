@@ -1,0 +1,8 @@
+digraph "/usr/local/lib/libconcurrencpp.a" {
+node [
+  fontsize = "12"
+];
+    "node1" [ label = "/usr/local/lib/libconcurrencpp.a", shape = septagon ];
+    "node0" [ label = "macpcap", shape = egg ];
+    "node0" -> "node1" [ style = dotted ] // macpcap -> /usr/local/lib/libconcurrencpp.a
+}

@@ -1,0 +1,10 @@
+digraph "macpcap" {
+node [
+  fontsize = "12"
+];
+    "node0" [ label = "macpcap", shape = egg ];
+    "node1" [ label = "/usr/local/lib/libconcurrencpp.a", shape = septagon ];
+    "node0" -> "node1" [ style = dotted ] // macpcap -> /usr/local/lib/libconcurrencpp.a
+    "node2" [ label = "fmt::fmt", shape = doubleoctagon ];
+    "node0" -> "node2" [ style = dotted ] // macpcap -> fmt::fmt
+}

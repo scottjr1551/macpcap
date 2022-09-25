@@ -1,0 +1,7 @@
+<map id="ProtocolStats::printTable" name="ProtocolStats::printTable">
+<area shape="rect" id="node1" title="Routine to print out the protocol statistics table." alt="" coords="5,55,171,80"/>
+<area shape="rect" id="node2" href="$class_protocol_stats.html#a245c722b1add778433f260938c562473" title=" " alt="" coords="219,55,375,80"/>
+<area shape="rect" id="node3" href="$class_protocol_stats.html#a5fe44640e55dca5116f7de07d32e5812" title="Sort a list of pairs by the second element, in this case doubles." alt="" coords="423,5,573,31"/>
+<area shape="rect" id="node4" href="$class_protocol_stats.html#a5e5515ac2d6e416ed8470abeb0186e61" title="sort a list of pairs by second element, in this case int" alt="" coords="425,55,571,80"/>
+<area shape="rect" id="node5" href="$class_protocol_stats.html#a010cf40588c7863cc8dbe6ca63c7c940" title="Sort a list of pairs by the second element, in this case strings." alt="" coords="424,104,572,129"/>
+</map>
