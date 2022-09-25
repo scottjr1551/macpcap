@@ -1,3 +1,0 @@
-/Users/scottroberts/CLionProjects/macpcap/cmake-build-debug/CMakeFiles/macpcap.dir
-/Users/scottroberts/CLionProjects/macpcap/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/scottroberts/CLionProjects/macpcap/cmake-build-debug/CMakeFiles/rebuild_cache.dir
