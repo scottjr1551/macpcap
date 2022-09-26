@@ -11,17 +11,17 @@ Program is designed for Apple OSX and may not run other platforms
 - macpcap --help
   - Displays the help message and all the valid options
 - macpcap --filename pcapfile.pcap
-        - Displays all statistics table for the trace file pcapfile.pcap
+  - Displays all statistics table for the trace file pcapfile.pcap
 - macpcap --filename file.pcap --report tcp --sorttcp packcount
-        - Displays just the statistics table for TCP conversations and sorts it based on the table header packetcount
+  - Displays just the statistics table for TCP conversations and sorts it based on the table header packetcount
 - macpcap --filename file.pcap --list 192.168.42.4:58018-54.144.73.197:443
-        - filters the capture on the supplied socket and then does the following:
-            - Display a list of the packets on the trace file
-            - displays the stgit push
+  - filters the capture on the supplied socket and then does the following:
+    - Display a list of the packets on the trace file
+    - displays the stgit push
             atistics for the filtered packets, that is the TCP conversation specified
-        - Note: the filter options is ignored of the list options is used.
- - mackpcap --filename file.pcap --filter bpf:tcp
-        - Filters out all packets that do not have a TCP header. The text after the : in bpf: can be any Berkley Packet Filter syntax.
+    - Note: the filter options is ignored of the list options is used.
+ - macpcap --filename file.pcap --filter bpf:tcp
+   - Filters out all packets that do not have a TCP header. The text after the : in bpf: can be any Berkley Packet Filter syntax.
 
  # Author Experience
  I retired from a large retailer as a lead network engineer five years ago. I have worked in the network troubleshooting business for 45 years.
