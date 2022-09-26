@@ -7,12 +7,12 @@ tabylate is used to create the statistics tables.
 Program is designed for Apple OSX and may not run other platforms
 <br>
 <br>
-#Examples
+# Eoxamples
 - macpcap --help
   - Displays the help message and all the valid options
 - macpcap --filename pcapfile.pcap
         - Displays all statistics table for the trace file pcapfile.pcap
-- nacpcap --filename file.pcap --report tcp --sorttcp packcount
+- macpcap --filename file.pcap --report tcp --sorttcp packcount
         - Displays just the statistics table for TCP conversations and sorts it based on the table header packetcount
 - macpcap --filename file.pcap --list 192.168.42.4:58018-54.144.73.197:443
         - filters the capture on the supplied socket and then does the following:
