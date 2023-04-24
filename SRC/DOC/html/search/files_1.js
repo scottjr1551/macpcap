@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hostpair_2ecpp_0',['HostPair.cpp',['../_host_pair_8cpp.html',1,'']]],
-  ['hostpair_2eh_1',['HostPair.h',['../_host_pair_8h.html',1,'']]]
+  ['ethernetstats_2ecpp_0',['EthernetStats.cpp',['../_ethernet_stats_8cpp.html',1,'']]],
+  ['ethernetstats_2eh_1',['EthernetStats.h',['../_ethernet_stats_8h.html',1,'']]]
 ];

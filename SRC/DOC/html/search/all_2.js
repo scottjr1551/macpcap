@@ -11,5 +11,7 @@ var searchData=
   ['conditional_3c_20true_2c_20then_2c_20else_20_3e_8',['conditional&lt; true, Then, Else &gt;',['../structnonstd_1_1variants_1_1std11_1_1conditional_3_01true_00_01_then_00_01_else_01_4.html',1,'nonstd::variants::std11']]],
   ['construct_5fvalue_9',['construct_value',['../unionnonstd_1_1optional__lite_1_1detail_1_1storage__t.html#afab300a66c2083a0772fe2123321319d',1,'nonstd::optional_lite::detail::storage_t']]],
   ['copy_5fassign_10',['copy_assign',['../structnonstd_1_1variants_1_1detail_1_1helper.html#a37700bacf5ca1685bca4a39fd410bd3b',1,'nonstd::variants::detail::helper']]],
-  ['copy_5fconstruct_11',['copy_construct',['../structnonstd_1_1variants_1_1detail_1_1helper.html#a9208c18edc8e4e9bec57b29889bb679b',1,'nonstd::variants::detail::helper']]]
+  ['copy_5fconstruct_11',['copy_construct',['../structnonstd_1_1variants_1_1detail_1_1helper.html#a9208c18edc8e4e9bec57b29889bb679b',1,'nonstd::variants::detail::helper']]],
+  ['csvfile_12',['csvfile',['../classcsvfile.html',1,'csvfile'],['../classcsvfile.html#ad0cf7061cb181f1572ba9251f17c3a08',1,'csvfile::csvfile()']]],
+  ['csvfile_2eh_13',['csvfile.h',['../csvfile_8h.html',1,'']]]
 ];

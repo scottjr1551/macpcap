@@ -11,6 +11,44 @@
 
 #include "ProtocolStats.h"
 
+/**
+ * \callgraph
+ * @callergraph
+ * @param el    - Ethernet Statistics List
+ */
+void
+ProtocolStats::writeCsvTable(std::map<std::string, ProtocolStats> &pl, const std::string &ss, bool debug) {
+    /**
+    * ##Processing Overview
+    *
+    * ### Sort map
+    */
+    std::vector<std::string> sl{ProtocolStats::sortMap(pl, ss)};
+    if (sl.empty()) sl = ProtocolStats::sortMap(pl, "id");
+
+    try {
+        csvfile csv("ProtocolStatsTable.csv"); // throws exceptions!
+        // Header
+        csv << "Protocol" <<
+            "PacketCount" <<
+            "ByteCount" <<
+            "PacketRate" <<
+            "Duration(sec)" << endrow;
+        // Data
+        for (auto const &key: sl) {
+            ProtocolStats value = pl[key];
+            csv << key << std::to_string(value.packets) <<
+                std::to_string(value.byteCount) <<
+                std::to_string(value.packetRate) <<
+                std::to_string(value.duration) << endrow;
+        }
+    }
+    catch (const std::exception &e) {
+        SPDLOG_INFO("Exception was thrown: {}", e.what());
+    }
+
+}
+
 
 /**
  * \callgraph
@@ -26,6 +64,7 @@ ProtocolStats::printTable(std::map<std::string, ProtocolStats> &pl, const std::s
      *
      * ### Sort map
      */
+    fmt::print("\n\nProtocol Stats Table\n\n");
     std::vector<std::string> sl{ProtocolStats::sortMap(pl, ss)};
     if (sl.empty() == 0) sl = ProtocolStats::sortMap(pl, "id");
     /**

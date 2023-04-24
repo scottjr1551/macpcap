@@ -159,7 +159,7 @@ std::string hexdump(const uint8_t *data, int dataLength) {
     for (size_t i = 0; i < dataLength; ++i) {
         if ((i % 16) == 0) {
             al.append("\n");
-            results.append(line + "  " + al);
+            results.append(line.append("  " + al));
             line = fmt::format("     {:>5d}: ", i);
             al = {};
         }
@@ -434,7 +434,6 @@ void pp(pcpp::Packet &p, int pc,
  * @callergraph
  * @brief Report Generator
  * Function to generate reports on the HostPair and TCP conversation tables in the following format: <br>
- *      -   PDF
  *      -   Formatted text
  *
  * @param hpl        - Host pair list
@@ -455,22 +454,58 @@ void report(std::map<std::string, HostPair> hpl,
 ) {
 
     if ((reportType == "all" || reportType == "prot") && !pl.empty()) {
-        fmt::print("\n\nProtocol Stats Table\n\n");
         ProtocolStats::printTable(pl, ss["prot"], debug);
     }
     if ((reportType == "all" || reportType == "eth") && !el.empty()) {
-        fmt::print("\n\nEthernet Stats Table\n\n");
         EthernetStats::printTable(el, ss["eth"], debug);
     }
     if ((reportType == "all" || reportType == "hp") && !hpl.empty()) {
-        fmt::print("\n\nHost Pair List Report\n\n");
         HostPair::printTable(hpl, ss["hp"], debug);
     }
     if ((reportType == "all" || reportType == "tcp") && !tcl.empty()) {
-        fmt::print("\n\nTCP Conversations\n");
         TCPConversation::printTable(tcl, ss["tcp"], debug);
     }
 }
+
+/**
+ * @callgraph
+ * @callergraph
+ * @brief Create CSV file
+ *
+ * @param hpl        - Host pair list
+ * @param tcl        - List of sockets seen in the capture
+ * @param debug      - Used to tell functions to display log messages
+ * @param pl         - List of protocol seen in the capture
+ * @param el         - List of ethernet mac address pairs
+ * @param reportType - Used to display a specific report and skip the others
+ * @param ss         - sortstring used to sort stats based on a column heading
+ */
+void writeCsv(std::map<std::string, HostPair> hpl,
+              std::map<std::string, TCPConversation> tcl,
+              std::map<std::string, std::string> ss,
+              std::map<std::string, EthernetStats> el,
+              std::map<std::string, ProtocolStats> pl,
+              bool debug,
+              const std::string &reportType
+) {
+
+    std::filesystem::path cwd = std::filesystem::current_path();
+    fmt::print("Creating CSV files to directory {}\n", cwd.string());
+
+    if ((reportType == "all" || reportType == "prot") && !pl.empty()) {
+        ProtocolStats::writeCsvTable(pl, ss["prot"], debug);
+    }
+    if ((reportType == "all" || reportType == "eth") && !el.empty()) {
+        EthernetStats::writeCsvTable(el, ss["eth"], debug);
+    }
+    if ((reportType == "all" || reportType == "hp") && !hpl.empty()) {
+        HostPair::writeCsvTable(hpl, ss["hp"], debug);
+    }
+    if ((reportType == "all" || reportType == "tcp") && !tcl.empty()) {
+        TCPConversation::writeCsvTable(tcl, ss["tcp"], debug);
+    }
+}
+
 
 /*!
  * @callergraph
@@ -482,6 +517,9 @@ void report(std::map<std::string, HostPair> hpl,
  */
 
 int main(int argc, char **argv) {
+
+    auto t_start = std::chrono::high_resolution_clock::now();
+
     /**
     *  ## Main Processing Overview
     */
@@ -509,6 +547,7 @@ int main(int argc, char **argv) {
      */
     std::regex newlines_re("\n+");
     auto dateTime = std::regex_replace(dt, newlines_re, "");
+    auto startTime = dateTime;
 
     fmt::print("Starting macpcap at {}{}{}. Argc={}\n", blue, dateTime, reset, argc);
     SPDLOG_INFO("Arguments passed. ARGC={}", argc);
@@ -523,6 +562,10 @@ int main(int argc, char **argv) {
     po::options_description desc("Allowed options");
     desc.add_options()
             ("help", "produce help message")
+            ("reportType", po::value<std::string>(), "Report type"
+                                                     "text - Output goes to screen and is default"
+                                                     "csv  - CSV file is created"
+            )
             ("filename", po::value<std::string>(), "PCAP file name")
             ("log", "Turn on logging")
             ("list", po::value<std::string>(), "packet list: --list socket-id\n"
@@ -570,6 +613,15 @@ int main(int argc, char **argv) {
     bool debug{false};
     if (vm.count("log")) {
         debug = true;
+    }
+
+    enum reportType {
+        text, csv, pdf
+    };
+    int rt = text;
+    if (vm.count("reportType")) {
+        std::string s{vm["reportType"].as<std::string>()};
+        if (s == "csv") rt = csv;
     }
 
     if (vm.count("help")) {
@@ -794,15 +846,30 @@ int main(int argc, char **argv) {
 
     if (debug) SPDLOG_INFO("Processing report");
 
-    report(hostPairList, tcpConversationList, sortString, ethernetStatsList, protocolStatsList, debug, reportType);
+    switch (rt) {
+        case text :
+            report(hostPairList, tcpConversationList, sortString, ethernetStatsList, protocolStatsList, debug,
+                   reportType);
+            break;
+        case csv :
+            writeCsv(hostPairList, tcpConversationList, sortString, ethernetStatsList, protocolStatsList, debug,
+                     reportType);
+            break;
+    }
 
-    // close the file
+    // close the packet reader
 
     reader->close();
 
     // closing stats
 
-    SPDLOG_INFO("Packets processed: {}", packetCount);
+    auto t_end = std::chrono::high_resolution_clock::now();
+
+    double elapsed_time_ms = std::chrono::duration<double, std::milli>(t_end - t_start).count();
+
+    SPDLOG_INFO("Packets processed: {} in {} ms", packetCount, elapsed_time_ms);
+    fmt::print("\n\nPackets processed: {} in {} ms {} seconds\n\n", packetCount, elapsed_time_ms,
+               elapsed_time_ms / 1000.0);
     SPDLOG_INFO("Complete...Exiting");
     return 0;
 

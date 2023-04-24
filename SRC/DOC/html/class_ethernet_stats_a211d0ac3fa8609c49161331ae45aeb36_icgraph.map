@@ -1,7 +1,9 @@
 <map id="EthernetStats::sortDbl" name="EthernetStats::sortDbl">
-<area shape="rect" id="node1" title=" " alt="" coords="627,5,779,31"/>
-<area shape="rect" id="node2" href="$class_ethernet_stats.html#aa6b64515c046c85ba9f457159a2412df" title=" " alt="" coords="421,5,579,31"/>
-<area shape="rect" id="node3" href="$class_ethernet_stats.html#a01cb0395a4f55becaa5f5d41d045aada" title=" " alt="" coords="207,5,373,31"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="104,5,159,31"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,5,56,31"/>
+<area shape="rect" id="node1" title=" " alt="" coords="673,31,825,56"/>
+<area shape="rect" id="node2" href="$class_ethernet_stats.html#aa6b64515c046c85ba9f457159a2412df" title=" " alt="" coords="468,31,625,56"/>
+<area shape="rect" id="node3" href="$class_ethernet_stats.html#a01cb0395a4f55becaa5f5d41d045aada" title=" " alt="" coords="240,5,407,31"/>
+<area shape="rect" id="node6" href="$class_ethernet_stats.html#a149e8e9f5239cbbec2829907dfff3cff" title=" " alt="" coords="227,55,420,80"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="114,5,169,31"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,31,56,56"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#aa77afe984884f23faf0d9aee794e1b09" title="Create CSV file." alt="" coords="104,55,179,80"/>
 </map>

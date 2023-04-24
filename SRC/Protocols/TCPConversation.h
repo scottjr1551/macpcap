@@ -26,6 +26,7 @@
 #include "../include/tabulate.hpp"
 #include <regex>
 #include <numeric>
+#include "../include/csvfile.h"
 
 
 class TCPConversation {
@@ -73,6 +74,10 @@ public:
 
     static void printTable(std::map<std::string, TCPConversation> &tcl, const std::string &ss,
                            bool debug
+    );
+
+    static void writeCsvTable(std::map<std::string, TCPConversation> &tcl, const std::string &ss,
+                              bool debug
     );
 
     static std::vector<std::string>
