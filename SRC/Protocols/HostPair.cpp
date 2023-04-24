@@ -72,6 +72,7 @@ void HostPair::printTable(std::map<std::string, HostPair> &hpl, const std::strin
      *
      * ### Sort map
      */
+    fmt::print("\n\nHost Pair List Report\n\n");
     std::vector<std::string> sl{HostPair::sortMap(hpl, ss)};
     if (sl.empty()) sl = HostPair::sortMap(hpl, "id");
     /**
@@ -251,4 +252,54 @@ std::vector<std::string> HostPair::getIpPair(const pcpp::Packet &pkt, bool debug
     }
     if (debug) SPDLOG_INFO("key {} {}", ipkey[0], ipkey[1]);
     return ipkey;
+}
+
+/**
+ * \callgraph
+ * @callergraph
+ * @param el    - Ethernet Statistics List
+ */
+void
+HostPair::writeCsvTable(std::map<std::string, HostPair> &hpl, const std::string &ss, bool debug) {
+    /**
+    * ##Processing Overview
+    *
+    * ### Sort map
+    */
+    std::vector<std::string> sl{HostPair::sortMap(hpl, ss)};
+    if (sl.empty()) sl = HostPair::sortMap(hpl, "id");
+
+    try {
+        csvfile csv("HostPairTable.csv"); // throws exceptions!
+        // Header
+        csv << "HostPair" <<
+            "PacketCount" <<
+            "InPacketCount" <<
+            "OutPacketCount" <<
+            "ByteCount" <<
+            "InByteCnt" <<
+            "OutByteCnt" <<
+            "PacketRate" <<
+            "InPacketRate" <<
+            "OutPacketRate" <<
+            "Duration(sec)" << endrow;
+        // Data
+        for (auto const &key: sl) {
+            HostPair value = hpl[key];
+            csv << key << std::to_string(value.packetCount) <<
+                std::to_string(value.inputPacketCount) <<
+                std::to_string(value.outputPacketCount) <<
+                std::to_string(value.byteCount) <<
+                std::to_string(value.inputByteCount) <<
+                std::to_string(value.outputByteCount) <<
+                std::to_string(value.packetRate) <<
+                std::to_string(value.inputPacketRate) <<
+                std::to_string(value.outputPacketRate) <<
+                std::to_string(value.duration) << endrow;
+        }
+    }
+    catch (const std::exception &e) {
+        SPDLOG_INFO("Exception was thrown: {}", e.what());
+    }
+
 }

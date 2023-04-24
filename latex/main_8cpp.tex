@@ -1,0 +1,203 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$IPv4\+Layer.\+h$>$}\newline
+{\ttfamily \#include $<$Packet.\+h$>$}\newline
+{\ttfamily \#include $<$Pcap\+File\+Device.\+h$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$fmt/format.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include \char`\"{}SRC/\+Protocols/parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}SRC/\+Protocols/\+Ethernet\+Stats.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$spdlog/spdlog.\+h$>$}\newline
+{\ttfamily \#include $<$spdlog/sinks/basic\+\_\+file\+\_\+sink.\+h$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$boost/program\+\_\+options.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}my\+Color.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}SRC/\+Protocols/\+Protocol\+Stats.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Pcap\+Filter.\+h$>$}\newline
+{\ttfamily \#include $<$Pcap\+Plus\+Plus\+Version.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}System\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{main_8cpp_ac2af34ccca605bd3079feefbaf2edabc}{hexdump}} (const uint8\+\_\+t $\ast$data, int data\+Length)
+\begin{DoxyCompactList}\small\item\em hexdump Function to dump out a raw packet in hex and ascii formats \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aa438523b2ee045b3c9764500bd5d3e5a}{print}} (const pcpp\+::\+Packet \&p, int pc, bool debug)
+\begin{DoxyCompactList}\small\item\em Print packets Function to print packets and there headers to the log file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a9530aa388f494333a2e31b1fd04d4f45}{pp}} (pcpp\+::\+Packet \&p, int pc, std\+::map$<$ uint16\+\_\+t, int $>$ \&ip\+Id\+List, std\+::map$<$ uint32\+\_\+t, std\+::vector$<$ long $>$ $>$ \&send\+Seq\+List, std\+::map$<$ uint32\+\_\+t, std\+::vector$<$ long $>$ $>$ \&recv\+Seq\+List, std\+::string \&ls)
+\begin{DoxyCompactList}\small\item\em Print formatted packet for list option. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aa39be38a2541401545d079bf2ea12395}{report}} (std\+::map$<$ std\+::string, Host\+Pair $>$ hpl, std\+::map$<$ std\+::string, TCPConversation $>$ tcl, std\+::map$<$ std\+::string, std\+::string $>$ ss, std\+::map$<$ std\+::string, Ethernet\+Stats $>$ el, std\+::map$<$ std\+::string, Protocol\+Stats $>$ pl, bool debug, const std\+::string \&report\+Type)
+\begin{DoxyCompactList}\small\item\em Report Generator Function to generate reports on the Host\+Pair and TCP conversation tables in the following format\+: ~\newline
+ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aa77afe984884f23faf0d9aee794e1b09}{write\+Csv}} (std\+::map$<$ std\+::string, Host\+Pair $>$ hpl, std\+::map$<$ std\+::string, TCPConversation $>$ tcl, std\+::map$<$ std\+::string, std\+::string $>$ ss, std\+::map$<$ std\+::string, Ethernet\+Stats $>$ el, std\+::map$<$ std\+::string, Protocol\+Stats $>$ pl, bool debug, const std\+::string \&report\+Type)
+\begin{DoxyCompactList}\small\item\em Create CSV file. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{main_8cpp_autotoc_md0}{}\doxysubsubsection{Mac Pcap Analyzer (macpcap)}\label{main_8cpp_autotoc_md0}
+\begin{DoxyAuthor}{Author}
+Scott Roberts 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ac2af34ccca605bd3079feefbaf2edabc}\label{main_8cpp_ac2af34ccca605bd3079feefbaf2edabc}} 
+\index{main.cpp@{main.cpp}!hexdump@{hexdump}}
+\index{hexdump@{hexdump}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{hexdump()}{hexdump()}}
+{\footnotesize\ttfamily std\+::string hexdump (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{int}]{data\+Length }\end{DoxyParamCaption})}
+
+
+
+hexdump Function to dump out a raw packet in hex and ascii formats 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ This is a uint8\+\_\+t pointer ti the raw packets data \\
+\hline
+{\em data\+Length} & -\/ This is the length of the buffer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ string containing the hex dump output 
+\end{DoxyReturn}
+\mbox{\Hypertarget{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & contains number of arguments passed to main \\
+\hline
+{\em argv} & array of char arrays contain the parameters. ARGV\mbox{[}1\mbox{]} is a pcap file name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 -\/ No errors 1 -\/ Errors occurred 
+\end{DoxyReturn}
+\hypertarget{main.cpp_autotoc_md1}{}\doxysubsubsection{Main Processing Overview}\label{main.cpp_autotoc_md1}
+\hypertarget{main.cpp_autotoc_md2}{}\doxyparagraph{Remove old log file and initialize logger}\label{main.cpp_autotoc_md2}
+\hypertarget{main.cpp_autotoc_md3}{}\doxyparagraph{Get time of day}\label{main.cpp_autotoc_md3}
+\hypertarget{main.cpp_autotoc_md4}{}\doxyparagraph{Use regex to remove new line character from date and time string.}\label{main.cpp_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Print startup message with a list of arguments passed
+\end{DoxyItemize}\hypertarget{main.cpp_autotoc_md5}{}\doxyparagraph{validate arguments\+:}\label{main.cpp_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item Filename of the pcap trace. Make sure it exists and is in a pcap format
+\end{DoxyEnumerate}\hypertarget{main.cpp_autotoc_md6}{}\doxyparagraph{Open passed pcap file for reading packets}\label{main.cpp_autotoc_md6}
+process filter if supplied ip\+:x.\+x.\+x.\+x -\/ filter on IPaddress hp\+:x.\+x.\+x.\+x-\/y.\+y.\+y.\+y -\/ filter oon a host pair port\+:p -\/ filter on TCP port socket\+: x.\+x.\+x.\+x\+:srcport-\/y.\+y.\+y.\+y\+:dstport mac\+:hh-\/hh-\/hh-\/hh-\/hh-\/hh prot\+:tcp$\vert$udp... bpf\+: BOF string -\/ use any of the BPF commands. Put filter at end of command line or enclose in quotes\hypertarget{main.cpp_autotoc_md7}{}\doxyparagraph{Loop over file reading a packet, sending it to the parser, until EOF}\label{main.cpp_autotoc_md7}
+\hypertarget{main.cpp_autotoc_md8}{}\doxyparagraph{Generate reports}\label{main.cpp_autotoc_md8}
+\mbox{\Hypertarget{main_8cpp_a9530aa388f494333a2e31b1fd04d4f45}\label{main_8cpp_a9530aa388f494333a2e31b1fd04d4f45}} 
+\index{main.cpp@{main.cpp}!pp@{pp}}
+\index{pp@{pp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pp()}{pp()}}
+{\footnotesize\ttfamily void pp (\begin{DoxyParamCaption}\item[{pcpp\+::\+Packet \&}]{p,  }\item[{int}]{pc,  }\item[{std\+::map$<$ uint16\+\_\+t, int $>$ \&}]{ip\+Id\+List,  }\item[{std\+::map$<$ uint32\+\_\+t, std\+::vector$<$ long $>$ $>$ \&}]{send\+Seq\+List,  }\item[{std\+::map$<$ uint32\+\_\+t, std\+::vector$<$ long $>$ $>$ \&}]{recv\+Seq\+List,  }\item[{std\+::string \&}]{ls }\end{DoxyParamCaption})}
+
+
+
+Print formatted packet for list option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & -\/ Parsed packet \\
+\hline
+{\em ip\+Id\+List} & -\/ Map used to track Ip\+Id for the purpose of checking for retransmitted packets \\
+\hline
+{\em pc} & -\/ Packet number \\
+\hline
+{\em send\+Seq\+List} & -\/ Map of send sequence numbers. Key is the sequence number and the value is a vector containing packet number, ack flag ( 1 indicates ack processed),timestamp of packet \\
+\hline
+{\em recv\+Seq\+List} & -\/ Map of receive sequence numbers. Key is the sequence number and the value is a vector containing packet number, ack flag ( 1 indicates ack processed),timestamp of packet \\
+\hline
+{\em ls} & -\/ Socket string used to determine first sender for response time calculations \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aa438523b2ee045b3c9764500bd5d3e5a}\label{main_8cpp_aa438523b2ee045b3c9764500bd5d3e5a}} 
+\index{main.cpp@{main.cpp}!print@{print}}
+\index{print@{print}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void print (\begin{DoxyParamCaption}\item[{const pcpp\+::\+Packet \&}]{p,  }\item[{int}]{pc,  }\item[{bool}]{debug }\end{DoxyParamCaption})}
+
+
+
+Print packets Function to print packets and there headers to the log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pkt} & -\/ Parsed packet \\
+\hline
+{\em ip\+Hdr} & -\/ Pointer to IP Header. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aa39be38a2541401545d079bf2ea12395}\label{main_8cpp_aa39be38a2541401545d079bf2ea12395}} 
+\index{main.cpp@{main.cpp}!report@{report}}
+\index{report@{report}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void report (\begin{DoxyParamCaption}\item[{std\+::map$<$ std\+::string, Host\+Pair $>$}]{hpl,  }\item[{std\+::map$<$ std\+::string, TCPConversation $>$}]{tcl,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$}]{ss,  }\item[{std\+::map$<$ std\+::string, Ethernet\+Stats $>$}]{el,  }\item[{std\+::map$<$ std\+::string, Protocol\+Stats $>$}]{pl,  }\item[{bool}]{debug,  }\item[{const std\+::string \&}]{report\+Type }\end{DoxyParamCaption})}
+
+
+
+Report Generator Function to generate reports on the Host\+Pair and TCP conversation tables in the following format\+: ~\newline
+ 
+
+
+\begin{DoxyItemize}
+\item Formatted text
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em hpl} & -\/ Host pair list \\
+\hline
+{\em tcl} & -\/ List of sockets seen in the capture \\
+\hline
+{\em debug} & -\/ Used to tell functions to display log messages \\
+\hline
+{\em pl} & -\/ List of protocol seen in the capture \\
+\hline
+{\em el} & -\/ List of ethernet mac address pairs \\
+\hline
+{\em report\+Type} & -\/ Used to display a specific report and skip the others \\
+\hline
+{\em ss} & -\/ sortstring used to sort stats based on a column heading \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8cpp_aa77afe984884f23faf0d9aee794e1b09}\label{main_8cpp_aa77afe984884f23faf0d9aee794e1b09}} 
+\index{main.cpp@{main.cpp}!writeCsv@{writeCsv}}
+\index{writeCsv@{writeCsv}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{writeCsv()}{writeCsv()}}
+{\footnotesize\ttfamily void write\+Csv (\begin{DoxyParamCaption}\item[{std\+::map$<$ std\+::string, Host\+Pair $>$}]{hpl,  }\item[{std\+::map$<$ std\+::string, TCPConversation $>$}]{tcl,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$}]{ss,  }\item[{std\+::map$<$ std\+::string, Ethernet\+Stats $>$}]{el,  }\item[{std\+::map$<$ std\+::string, Protocol\+Stats $>$}]{pl,  }\item[{bool}]{debug,  }\item[{const std\+::string \&}]{report\+Type }\end{DoxyParamCaption})}
+
+
+
+Create CSV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hpl} & -\/ Host pair list \\
+\hline
+{\em tcl} & -\/ List of sockets seen in the capture \\
+\hline
+{\em debug} & -\/ Used to tell functions to display log messages \\
+\hline
+{\em pl} & -\/ List of protocol seen in the capture \\
+\hline
+{\em el} & -\/ List of ethernet mac address pairs \\
+\hline
+{\em report\+Type} & -\/ Used to display a specific report and skip the others \\
+\hline
+{\em ss} & -\/ sortstring used to sort stats based on a column heading \\
+\hline
+\end{DoxyParams}

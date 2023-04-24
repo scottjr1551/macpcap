@@ -52,6 +52,47 @@ void EthernetStats::updateCounters(const pcpp::Packet &pkt) {
  * @param el    - Ethernet Statistics List
  */
 void
+EthernetStats::writeCsvTable(std::map<std::string, EthernetStats> &el, const std::string &ss, bool debug) {
+    /**
+    * ##Processing Overview
+    *
+    * ### Sort map
+    */
+    std::vector<std::string> sl{EthernetStats::sortMap(el, ss, debug)};
+    if (sl.empty()) sl = EthernetStats::sortMap(el, "id", debug);
+
+    try {
+        csvfile csv("EtherStatsTable.csv"); // throws exceptions!
+        // Header
+        csv << "MacPair" << "PacketCount" << "InPacketCount" << "OutPacketCount" << "ByteCount" << "InByteCnt" <<
+            "OutByteCnt" << "PacketRate" << "InPacketRate" << "OutPacketRate" << "Duration(sec)" << endrow;
+        // Data
+        for (auto const &key: sl) {
+            EthernetStats value = el[key];
+            csv << key << std::to_string(value.packets) <<
+                std::to_string(value.sendPkt) <<
+                std::to_string(value.recvPkt) <<
+                std::to_string(value.byteCount) <<
+                std::to_string(value.sendByteCount) <<
+                std::to_string(value.recvByteCount) <<
+                std::to_string(value.packetRate) <<
+                std::to_string(value.recvPacketRate) <<
+                std::to_string(value.sendPacketRate) <<
+                std::to_string(value.duration) << endrow;
+        }
+    }
+    catch (const std::exception &e) {
+        SPDLOG_INFO("Exception was thrown: {}", e.what());
+    }
+
+}
+
+/**
+ * \callgraph
+ * @callergraph
+ * @param el    - Ethernet Statistics List
+ */
+void
 EthernetStats::printTable(std::map<std::string, EthernetStats> &el, const std::string &ss, bool debug) {
     if (debug) SPDLOG_INFO("Printing EthernetStats Table. ss={}", ss);
     /**
@@ -59,6 +100,7 @@ EthernetStats::printTable(std::map<std::string, EthernetStats> &el, const std::s
      *
      * ### Sort map
      */
+    fmt::print("\n\nEthernet Stats Table\n\n");
     std::vector<std::string> sl{EthernetStats::sortMap(el, ss, debug)};
     if (sl.size() == 0) sl = EthernetStats::sortMap(el, "id", debug);
     /**

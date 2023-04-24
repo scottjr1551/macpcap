@@ -24,6 +24,7 @@
 #include <typeinfo>
 #include <spdlog/spdlog.h>
 #include "../include/tabulate.hpp"
+#include "../include/csvfile.h"
 
 
 class HostPair {
@@ -53,6 +54,7 @@ public:
         return ((ts.tv_sec) * 1e9 + (ts.tv_nsec)) / 1e9L;
     }
 
+    static void writeCsvTable(std::map<std::string, HostPair> &hpl, const std::string &ss, bool debug);
 
     /**
  * @callergraph

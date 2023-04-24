@@ -32,6 +32,7 @@
 #include <typeinfo>
 #include <EthLayer.h>
 #include "../include/tabulate.hpp"
+#include "../include/csvfile.h"
 
 
 class EthernetStats {
@@ -41,6 +42,8 @@ public:
     void updateCounters(const pcpp::Packet &pkt);
 
     static void printTable(std::map<std::string, EthernetStats> &el, const std::string &ss, bool debug);
+
+    static void writeCsvTable(std::map<std::string, EthernetStats> &el, const std::string &ss, bool debug);
 
     static std::vector<std::string>
     sortMap(const std::map<std::string, EthernetStats> &el, const std::string &colId, bool debug);

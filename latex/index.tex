@@ -1,0 +1,115 @@
+\hypertarget{index_macpcap}{}\doxysection{macpcap}\label{index_macpcap}
+Macpcap is used to analyze pcap and pcapng files on OSX systems. This version writes all output to the standard out using fmt\+::print. The library tabylate is used to create the statistics tables. Program is designed for Apple OSX and may not run other platforms\hypertarget{index_Examples}{}\doxysection{Examples}\label{index_Examples}
+
+\begin{DoxyItemize}
+\item macpcap --help
+\begin{DoxyItemize}
+\item Displays the help message and all the valid options
+\end{DoxyItemize}
+\item macpcap --filename pcapfile.\+pcap
+\begin{DoxyItemize}
+\item Displays all statistics table for the trace file pcapfile.\+pcap
+\end{DoxyItemize}
+\item nacpcap --filename file.\+pcap --report tcp --sorttcp packcount
+\begin{DoxyItemize}
+\item Displays just the statistics table for TCP conversations and sorts it based on the table header packetcount
+\end{DoxyItemize}
+\item macpcap --filename file.\+pcap --list 192.\+168.\+42.\+4\+:58018-\/54.\+144.\+73.\+197\+:443
+\begin{DoxyItemize}
+\item filters the capture on the supplied socket and then does the following\+:
+\begin{DoxyItemize}
+\item Display a list of the packets on the trace file
+\item displays the stgit push atistics for the filtered packets, that is the TCP conversation specified
+\end{DoxyItemize}
+\item Note\+: the filter options is ignored of the list options is used.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+mackpcap --filename file.\+pcap --filter bpf\+:tcp
+\begin{DoxyItemize}
+\item Filters out all packets that do not have a TCP header. The text after the \+: in bpf\+: can be any Berkley Packet Filter syntax.
+\end{DoxyItemize}\hypertarget{index_Author}{}\doxysection{Experience}\label{index_Author}
+I retired from a large retailer as a lead network engineer five years ago. I have worked in the network troubleshooting business for 45 years. I started out working with IBM SNA on IBM and Tandem systems. Wrote many scripts and programs to help troubleshoot issues. Later in my career I started working on TCP/\+IP protocols and network gear from Bay Networks and Cisco. I have a strong background in the TCP/\+IP protocol suite.\hypertarget{index_History}{}\doxysection{History}\label{index_History}
+History of Macpcap
+\begin{DoxyEnumerate}
+\item First version was called CDF and was written in TAL (Tandem Application Language)
+\item next -\/ Python version of CDF when we moved to TCP/\+IP
+\item next -\/ Ruby/sinatra version created to integrate web front end and add live Cisco troubleshooting tools.
+\item retired
+\item five years later decided to crete this tool to keep my sanity and mind sharp. I decided to use c++ to avoid any issues with the previous versions that are corporate owned. Note\+: I am novice with C++.
+\end{DoxyEnumerate}\hypertarget{index_Libraries}{}\doxysection{Libraries}\label{index_Libraries}
+
+\begin{DoxyItemize}
+\item Boost Program Options
+\item Pcap\+Plus\+Plus
+\item FMT Format
+\item Tabulate
+\item SPDLog
+\end{DoxyItemize}\hypertarget{index_Cmakelist}{}\doxysection{Cmakelist}\label{index_Cmakelist}
+CMake\+Lists.\+txt$<$/font$>$ 
+
+
+\begin{DoxyPre}\#
+  \# Cmake file for the application macpcap
+  \# Author: Scott Roberts
+  \# Date: 07/25/2022
+  \#
+
+  \#
+  \# Global Definitions
+  \#
+
+  cmake\_minimum\_required(VERSION 3.23)
+  set(CMAKE\_CXX\_STANDARD 23)
+
+  project(macpcap VERSION 1.0.0.0)
+  set(CMAKE\_MODULE\_PATH \$\{CMAKE\_MODULE\_PATH\} "{}\$\{CMAKE\_SOURCE\_DIR\}/"{} /Users/scottroberts/CLionProjects/module)
+
+  include(cmake/include/GetDateTime.cmake)
+  include(cmake/include/misc.cmake)
+  include\_directories(/usr/local/include/pcapplusplus)
+  include\_directories(/usr/local/opt/libpcap/include)
+  include\_directories(/usr/local/include/concurrencpp-\/0.1.4 /usr/local/Cellar/boost/1.79.0\_1/include/)
+
+  getdatetime()  \# sets dt
+  message("{}\(\backslash\)nStarting at \$\{dt\} -\/ Version \$\{PROJECT\_VERSION\}"{})
+  systeminfo()
+  checkipo() \# will set IPO True if supported
+
+  \#
+  \# Target for macpcap
+  \#
+  message("{}\(\backslash\)nTarget: macpcap"{})
+  add\_executable(macpcap SRC/main.cpp SRC/Protocols/parser.cpp SRC/Protocols/HostPair.h SRC/Protocols/TCPConversation.h
+          SRC/Protocols/HostPair.cpp SRC/Protocols/HostPair.h SRC/Protocols/TCPConversation.cpp \mbox{\hyperlink{my_color_8h_source}{myColor.h}} SRC/Protocols/EthernetStats.cpp SRC/Protocols/EthernetStats.h SRC/Protocols/ProtocolStats.cpp SRC/Protocols/ProtocolStats.h)
+
+  message("{}macpcap: FMT package"{})
+  find\_package(fmt)
+  target\_link\_libraries(macpcap fmt::fmt)
+
+  message("{}macpcap: concurrencpp library"{})
+  target\_link\_libraries(macpcap /usr/local/lib/libconcurrencpp.a)
+
+  message("{}macpcap: Loading PCAP"{})
+  find\_package(PCAP)
+  target\_link\_libraries(\$\{PROJECT\_NAME\} \$\{PCAP\_LIBRARY\})
+
+  message("{}macpcap: Loading PCAP++"{})
+  find\_package(PcapPlusPlus REQUIRED)
+  target\_link\_libraries(\$\{PROJECT\_NAME\} \$\{PcapPlusPlus\_LIBRARIES\})
+
+find\_package(glog)
+target\_link\_libraries(\$\{PROJECT\_NAME\} glog::glog)
+
+  FIND\_PACKAGE(Boost 1.79 COMPONENTS program\_options REQUIRED)
+  INCLUDE\_DIRECTORIES(\$\{Boost\_INCLUDE\_DIR\})
+
+  TARGET\_LINK\_LIBRARIES(\$\{PROJECT\_NAME\} \$\{Boost\_LIBRARIES\})
+  \#
+  \# End oc CMake file
+  \#
+  getdatetime()
+  message("{}\(\backslash\)nStopping at \$\{dt\}"{})
+
+  \end{DoxyPre}
+ 

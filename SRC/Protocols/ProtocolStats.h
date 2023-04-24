@@ -15,6 +15,7 @@
 #include <IPv4Layer.h>
 #include <fmt/format.h>
 //#include "../Master.h"
+#include "../include/csvfile.h"
 #include <fmt/format.h>
 #include <iostream>
 #include <string>
@@ -32,6 +33,8 @@ public:
     bool debug{false};
 
     static void printTable(std::map<std::string, ProtocolStats> &pl, const std::string &ss, bool debug);
+
+    static void writeCsvTable(std::map<std::string, ProtocolStats> &pl, const std::string &ss, bool debug);
 
     static std::vector<std::string> sortMap(const std::map<std::string, ProtocolStats> &pl, const std::string &colId);
 

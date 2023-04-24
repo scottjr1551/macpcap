@@ -162,11 +162,166 @@ std::vector<double> calcStats(std::vector<double> &v) {
  * @param tcl   Map of TCP Conversation instances
  * @param ss    Column ID for sorting.
  */
+void TCPConversation::writeCsvTable(std::map<std::string, TCPConversation> &tcl, const std::string &ss,
+                                    bool debug
+) {
+    if (debug) SPDLOG_INFO("Printing TCP Conversation Table. ss={}", ss);
+
+    long double x(0.0L);
+    long index;
+
+    for (auto &[key, value]: tcl) {
+        if (debug) SPDLOG_INFO("Key {}", key);
+        index = 0;
+        x = 0.0L;
+        value.sendAckTimeAvg = 0.0;
+        value.recvAckTimeAvg = 0.0;
+        TCPConversation::seqRec seq;
+        for (std::pair<const unsigned int, seqRec> sr: value.sendSequenceNumbers) {
+            seq = sr.second;
+            if (seq.ack) {
+                x += (TCPConversation::tsConSec(seq.ackTime) - TCPConversation::tsConSec(seq.ts));
+                index++;
+            } else {
+                value.seqUnacknowledged++;
+            }
+        }
+        if (index > 0 && x > 0)
+            value.sendAckTimeAvg = (x / index);
+
+        index = 0;
+        x = 0.0L;
+        for (std::pair<const unsigned int, seqRec> sr: value.recvSequenceNumbers) {
+            seq = sr.second;
+            if (seq.ack) {
+                x += (TCPConversation::tsConSec(seq.ackTime) - TCPConversation::tsConSec(seq.ts));
+                index++;
+            } else {
+                value.seqUnacknowledged++;
+            }
+        }
+        if (index > 0 && x > 0) value.recvAckTimeAvg = (x / index);
+    }
+
+    std::vector<std::string> sl{TCPConversation::sortMap(tcl, ss)};
+    if (sl.empty()) sl = TCPConversation::sortMap(tcl, "id");
+
+    csvfile csv("TcpConversationStatsTable.csv"); // throws exceptions!
+    // Header
+    csv << "TCPConversation" <<
+        "SrcMac" <<
+        "DestMac" <<
+        "HandShake" <<
+        "CTS->D(ms)" <<
+        "CTD-S(ms)" <<
+        "SendAckTime-RTT" <<
+        "recvAckTime-RTT" <<
+        "AvgRspTime" <<
+        "Unackseq#" <<
+        "SendDupAck" <<
+        "RecvDupAck" <<
+        "Resets" <<
+        "ZeroWindow" <<
+        "sendDataPkt" <<
+        "RecvDataPkt" <<
+        "Retrans" <<
+        "RetransRate" <<
+        "InRetrans" <<
+        "OutRetrans" <<
+        "InterGapTime" <<
+        "PacketCount" <<
+        "InPacketCount" <<
+        "OutPacketCount" <<
+        "ByteCount" <<
+        "InByteCnt" <<
+        "OutByteCnt" <<
+        "PacketRate" <<
+        "RecvPacketRate" <<
+        "SendPacketRate" <<
+        "recvWindowUpdate" <<
+        "sendWindowUpdate" <<
+        "Duration(sec)" << endrow;
+
+    for (auto const &key: sl) {
+
+        TCPConversation value = tcl[key];
+
+        std::string handShake{"......"};
+        if (value.syn) handShake[0] = 'S';
+        if (value.ack) handShake[5] = 'A';
+        if (value.synAck) {
+            handShake[2] = 'S';
+            handShake[3] = 'A';
+        }
+        if (value.syn && !value.synAck && value.RST) {
+            handShake[2] = 'R';
+            handShake[3] = '.';
+        }
+
+        if (value.syn && value.synAck && value.RST) handShake[5] = 'R';
+        enum rindex {
+            mean = 0,
+            sum = 1,
+            std = 2,
+            var = 4
+        };
+
+        std::vector<double> r = calcStats(value.iglist);
+        value.igAverageTime = fmt::format("{:.5f}", r[mean]);
+
+        r = calcStats(value.rspTime);
+        value.avgResponseTime = fmt::format("{:.5f}", r[mean]);
+
+        csv << key << value.sourceMac << value.destMac << handShake <<
+            std::to_string(value.synSynAckTime) <<
+            std::to_string(value.synAckAckTime) <<
+            std::to_string(value.sendAckTimeAvg) <<
+            std::to_string(value.recvAckTimeAvg) <<
+            value.avgResponseTime <<
+            std::to_string(value.seqUnacknowledged) <<
+            std::to_string(value.sendDupAck) <<
+            std::to_string(value.recvDupAck) <<
+            std::to_string(value.resetCount) <<
+            std::to_string(value.zeroWindow) <<
+            std::to_string(value.sendDataPkt) <<
+            std::to_string(value.recvDataPkt) <<
+            std::to_string(value.totalRetrans) <<
+            std::to_string(value.totalRetransPercentage) <<
+            std::to_string(value.inRetranCount) <<
+            std::to_string(value.outRetransCount) <<
+            value.igAverageTime <<
+            std::to_string(value.packetCount) <<
+            std::to_string(value.inputPacketCount) <<
+            std::to_string(value.outputPacketCount) <<
+            std::to_string(value.byteCount) <<
+            std::to_string(value.inputByteCount) <<
+            std::to_string(value.outputByteCount) <<
+            std::to_string(value.packetRate) <<
+            std::to_string(value.inputPacketRate) <<
+            std::to_string(value.outputPacketRate) <<
+            std::to_string(value.recvWindowUpdates) <<
+            std::to_string(value.sendWindowUpdates) <<
+            std::to_string(value.duration) << endrow;
+    }
+}
+
+
+/**
+ * @callgraph
+ * @callergraph
+ * @brief Display Statistics Table
+ *
+ * Routine to display the statistics collected for the TCP Conversations in a tabular format. The library Tabulate
+ * is used to create the tables.
+ * @param tcl   Map of TCP Conversation instances
+ * @param ss    Column ID for sorting.
+ */
 void TCPConversation::printTable(std::map<std::string, TCPConversation> &tcl, const std::string &ss,
                                  bool debug
 ) {
     if (debug) SPDLOG_INFO("Printing TCP Conversation Table. ss={}", ss);
-
+    fmt::print("\n\nTCP Conversations\n");
+    
     long double x(0.0L);
     long index;
 
