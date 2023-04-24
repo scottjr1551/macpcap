@@ -1,6 +1,8 @@
 <map id="calcStats" name="calcStats">
-<area shape="rect" id="node1" title="Calculate Statistics values for a vector of doubles." alt="" coords="445,5,523,31"/>
-<area shape="rect" id="node2" href="$class_t_c_p_conversation.html#a733bb28d2d3c4d8eee5748fe51c5c173" title="Display Statistics Table." alt="" coords="207,5,397,31"/>
-<area shape="rect" id="node3" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="104,5,159,31"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,5,56,31"/>
+<area shape="rect" id="node1" title="Calculate Statistics values for a vector of doubles." alt="" coords="492,31,569,56"/>
+<area shape="rect" id="node2" href="$class_t_c_p_conversation.html#a733bb28d2d3c4d8eee5748fe51c5c173" title="Display Statistics Table." alt="" coords="240,5,431,31"/>
+<area shape="rect" id="node5" href="$class_t_c_p_conversation.html#aeee7d3c953430bc8bd64d8a627678622" title="Display Statistics Table." alt="" coords="227,55,444,80"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="114,5,169,31"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,31,56,56"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#aa77afe984884f23faf0d9aee794e1b09" title="Create CSV file." alt="" coords="104,55,179,80"/>
 </map>

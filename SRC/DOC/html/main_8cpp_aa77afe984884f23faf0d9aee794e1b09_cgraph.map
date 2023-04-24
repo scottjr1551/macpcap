@@ -1,13 +1,26 @@
 <map id="writeCsv" name="writeCsv">
-<area shape="rect" id="node1" title="Create CSV file." alt="" coords="5,141,80,167"/>
-<area shape="rect" id="node2" href="$class_ethernet_stats.html#a149e8e9f5239cbbec2829907dfff3cff" title=" " alt="" coords="128,92,321,117"/>
-<area shape="rect" id="node7" href="$class_host_pair.html#a89dba3c4dadd2992cd7dd504d8ef35df" title=" " alt="" coords="143,165,307,191"/>
-<area shape="rect" id="node3" href="$class_ethernet_stats.html#aa6b64515c046c85ba9f457159a2412df" title=" " alt="" coords="369,80,527,105"/>
-<area shape="rect" id="node4" href="$class_ethernet_stats.html#a211d0ac3fa8609c49161331ae45aeb36" title=" " alt="" coords="575,5,727,31"/>
-<area shape="rect" id="node5" href="$class_ethernet_stats.html#a239e13c09cea4cba7a2d28da507ca746" title=" " alt="" coords="577,55,724,80"/>
-<area shape="rect" id="node6" href="$class_ethernet_stats.html#a085e46f56e2c5d0a843b03e3573c0ae5" title=" " alt="" coords="576,104,725,129"/>
-<area shape="rect" id="node8" href="$class_host_pair.html#a05c89fb806d561ad3be621f36d0aea33" title=" " alt="" coords="384,184,512,209"/>
-<area shape="rect" id="node9" href="$class_host_pair.html#a2eb1be261918e431035aed091df11729" title=" " alt="" coords="589,153,712,179"/>
-<area shape="rect" id="node10" href="$class_host_pair.html#aa122970a3637b931756c2499ffa1432e" title=" " alt="" coords="591,203,710,228"/>
-<area shape="rect" id="node11" href="$class_host_pair.html#a9123735a9ccfc0a02b73c7e209d62412" title=" " alt="" coords="591,252,711,277"/>
+<area shape="rect" id="node1" title="Create CSV file." alt="" coords="5,265,80,291"/>
+<area shape="rect" id="node2" href="$class_ethernet_stats.html#a149e8e9f5239cbbec2829907dfff3cff" title=" " alt="" coords="140,129,333,155"/>
+<area shape="rect" id="node7" href="$class_host_pair.html#a89dba3c4dadd2992cd7dd504d8ef35df" title=" " alt="" coords="155,216,319,241"/>
+<area shape="rect" id="node12" href="$class_protocol_stats.html#a09d8ccf5cb00b020862ed1acb15683d4" title=" " alt="" coords="141,289,333,315"/>
+<area shape="rect" id="node17" href="$class_t_c_p_conversation.html#aeee7d3c953430bc8bd64d8a627678622" title="Display Statistics Table." alt="" coords="128,473,345,499"/>
+<area shape="rect" id="node3" href="$class_ethernet_stats.html#aa6b64515c046c85ba9f457159a2412df" title=" " alt="" coords="411,80,568,105"/>
+<area shape="rect" id="node4" href="$class_ethernet_stats.html#a211d0ac3fa8609c49161331ae45aeb36" title=" " alt="" coords="645,5,797,31"/>
+<area shape="rect" id="node5" href="$class_ethernet_stats.html#a239e13c09cea4cba7a2d28da507ca746" title=" " alt="" coords="648,55,795,80"/>
+<area shape="rect" id="node6" href="$class_ethernet_stats.html#a085e46f56e2c5d0a843b03e3573c0ae5" title=" " alt="" coords="647,104,796,129"/>
+<area shape="rect" id="node8" href="$class_host_pair.html#a05c89fb806d561ad3be621f36d0aea33" title=" " alt="" coords="425,209,553,235"/>
+<area shape="rect" id="node9" href="$class_host_pair.html#a2eb1be261918e431035aed091df11729" title=" " alt="" coords="660,153,783,179"/>
+<area shape="rect" id="node10" href="$class_host_pair.html#aa122970a3637b931756c2499ffa1432e" title=" " alt="" coords="662,203,781,228"/>
+<area shape="rect" id="node11" href="$class_host_pair.html#a9123735a9ccfc0a02b73c7e209d62412" title=" " alt="" coords="661,252,781,277"/>
+<area shape="rect" id="node13" href="$class_protocol_stats.html#a245c722b1add778433f260938c562473" title=" " alt="" coords="411,339,567,364"/>
+<area shape="rect" id="node14" href="$class_protocol_stats.html#a5fe44640e55dca5116f7de07d32e5812" title="Sort a list of pairs by the second element, in this case doubles." alt="" coords="646,301,797,327"/>
+<area shape="rect" id="node15" href="$class_protocol_stats.html#a5e5515ac2d6e416ed8470abeb0186e61" title="sort a list of pairs by second element, in this case int" alt="" coords="648,351,795,376"/>
+<area shape="rect" id="node16" href="$class_protocol_stats.html#a010cf40588c7863cc8dbe6ca63c7c940" title="Sort a list of pairs by the second element, in this case strings." alt="" coords="647,400,795,425"/>
+<area shape="rect" id="node18" href="$_t_c_p_conversation_8cpp.html#a6cee77591ebfe512bec86612058b7704" title="Calculate Statistics values for a vector of doubles." alt="" coords="451,449,528,475"/>
+<area shape="rect" id="node20" href="$class_t_c_p_conversation.html#a25fc244417194bf5aa1deaac60f8e41a" title=" " alt="" coords="399,499,580,524"/>
+<area shape="rect" id="node24" href="$class_t_c_p_conversation.html#a244dcad86171ecfd3a9c607cb5c034f3" title=" " alt="" coords="393,548,585,573"/>
+<area shape="rect" id="node19" href="$_t_c_p_conversation_8cpp.html#a7b6f39e3661c627970fec8f0cb575923" title="Calculate Variance." alt="" coords="686,449,757,475"/>
+<area shape="rect" id="node21" href="$class_t_c_p_conversation.html#aff79c446f42ecbebf6acfbaa51c8f462" title=" " alt="" coords="633,499,809,524"/>
+<area shape="rect" id="node22" href="$class_t_c_p_conversation.html#adf0ecff0309350c1d6d5ec802755d902" title="Sort Integers sort a list of pairs by second element, in this case int." alt="" coords="636,548,807,573"/>
+<area shape="rect" id="node23" href="$class_t_c_p_conversation.html#a02e60760726001bf9a34080cfb0e85a1" title=" " alt="" coords="635,597,808,623"/>
 </map>

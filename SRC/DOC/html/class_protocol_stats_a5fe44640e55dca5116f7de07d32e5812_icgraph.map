@@ -1,7 +1,9 @@
 <map id="ProtocolStats::sortDbl" name="ProtocolStats::sortDbl">
-<area shape="rect" id="node1" title="Sort a list of pairs by the second element, in this case doubles." alt="" coords="624,5,775,31"/>
-<area shape="rect" id="node2" href="$class_protocol_stats.html#a245c722b1add778433f260938c562473" title=" " alt="" coords="420,5,576,31"/>
-<area shape="rect" id="node3" href="$class_protocol_stats.html#a9978bb5b5e37567925976b387001dc50" title="Routine to print out the protocol statistics table." alt="" coords="207,5,372,31"/>
-<area shape="rect" id="node4" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="104,5,159,31"/>
-<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,5,56,31"/>
+<area shape="rect" id="node1" title="Sort a list of pairs by the second element, in this case doubles." alt="" coords="671,31,821,56"/>
+<area shape="rect" id="node2" href="$class_protocol_stats.html#a245c722b1add778433f260938c562473" title=" " alt="" coords="467,31,623,56"/>
+<area shape="rect" id="node3" href="$class_protocol_stats.html#a9978bb5b5e37567925976b387001dc50" title="Routine to print out the protocol statistics table." alt="" coords="240,5,405,31"/>
+<area shape="rect" id="node6" href="$class_protocol_stats.html#a09d8ccf5cb00b020862ed1acb15683d4" title=" " alt="" coords="227,55,419,80"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#aa39be38a2541401545d079bf2ea12395" title="Report Generator Function to generate reports on the HostPair and TCP conversation tables in the foll..." alt="" coords="114,5,169,31"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627" title=" " alt="" coords="5,31,56,56"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#aa77afe984884f23faf0d9aee794e1b09" title="Create CSV file." alt="" coords="104,55,179,80"/>
 </map>
