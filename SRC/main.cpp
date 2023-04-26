@@ -141,6 +141,8 @@
 namespace fs = std::filesystem;
 namespace po = boost::program_options;
 
+std::string softwareVersion = "1.1.0";
+
 /**
  * @callergraph
  * @callgraph
@@ -532,7 +534,7 @@ int main(int argc, char **argv) {
     spdlog::set_pattern("[%c] %l [%s-%!-%#] %v");
     spdlog::set_default_logger(logger);
     std::string v{pcpp::getPcapPlusPlusVersionFull()};
-    SPDLOG_INFO("MacPcap Starting. Using PCPP {}", v);
+    SPDLOG_INFO("MacPcap {}  Starting. Using PCPP {}", softwareVersion, v);
 
     /**
      *  ###  Get time of day
@@ -549,7 +551,8 @@ int main(int argc, char **argv) {
     auto dateTime = std::regex_replace(dt, newlines_re, "");
     auto startTime = dateTime;
 
-    fmt::print("Starting macpcap at {}{}{}. Argc={}\n", blue, dateTime, reset, argc);
+    fmt::print("Starting macpcap{}{}{} at {}{}{}. Argc={}\n", red, softwareVersion, reset, blue, dateTime, reset,
+               argc);
     SPDLOG_INFO("Arguments passed. ARGC={}", argc);
     for (int i = 0; i < argc; i++) {
         SPDLOG_INFO("\tArgument {}: {}\n", i, argv[i]);
